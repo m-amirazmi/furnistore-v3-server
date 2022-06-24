@@ -10,6 +10,7 @@ exports.uploadSmallImage = async (req, res) => {
 	fs.readFile(image.tempFilePath, async (err, uploadedFile) => {
 		if (err) throw err;
 		const data = await uploadFile(image, uploadedFile);
+		fs.unlinkSync(image.tempFilePath);
 		return res.status(201).json(data);
 	});
 };
