@@ -19,6 +19,7 @@ connectDB();
 app.use('/auth', require('./routes/auth'));
 app.use('/users', require('./routes/users'));
 app.use('/categories', require('./routes/categories'));
+app.use('/products', require('./routes/products'));
 app.use('/consts', require('./routes/constant'));
 app.use('/upload', require('./routes/uploads'));
 

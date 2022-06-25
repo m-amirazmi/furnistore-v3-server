@@ -21,14 +21,18 @@ exports.getCategory = async (req, res) => {
 };
 
 exports.updateCategory = async (req, res) => {
-	checkRoles(req, ['Product']);
+	const { status, message } = await checkRoles(req, ['Product']);
+	if (!status) return res.status(400).json(message);
+
 	const { id } = req.params;
 	const category = await Category.findOneAndUpdate({ _id: id }, req.body, { new: true });
 	return res.status(201).json(category);
 };
 
 exports.removeCategory = async (req, res) => {
-	checkRoles(req, ['Product']);
+	const { status, message } = await checkRoles(req, ['Product']);
+	if (!status) return res.status(400).json(message);
+
 	const { id } = req.params;
 	await Category.findOneAndRemove({ _id: id });
 	return res.sendStatus(204);
